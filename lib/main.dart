@@ -25,9 +25,10 @@ class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
 
   final List<Transaction> transactions = [
-    Transaction(id: "1", title: "Nike Shoes", amount: 12, date: DateTime.now()),
     Transaction(
-        id: "2", title: "Addidas Shoes", amount: 15, date: DateTime.now()),
+        id: "1", title: "Nike Shoes", amount: 12.86, date: DateTime.now()),
+    Transaction(
+        id: "2", title: "Addidas Shoes", amount: 15.99, date: DateTime.now()),
   ];
 
   @override
@@ -62,10 +63,16 @@ class MyHomePage extends StatelessWidget {
                         ),
                         padding: const EdgeInsets.all(10),
                         child: Text(
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              fontFamily: "cursive",
+                              color: Colors.purple),
                           item.amount.toString(),
                         ),
                       ),
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(item.title),
                           Text(
