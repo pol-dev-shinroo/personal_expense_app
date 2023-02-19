@@ -52,7 +52,23 @@ class MyHomePage extends StatelessWidget {
             Column(
               children: transactions.map((item) {
                 return Card(
-                  child: Text(item.title),
+                  child: Row(
+                    children: <Widget>[
+                      SizedBox(
+                        child: Text(
+                          item.amount.toString(),
+                        ),
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Text(item.title),
+                          Text(
+                            item.date.toString(),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 );
               }).toList(),
             )
