@@ -68,7 +68,7 @@ class MyHomePage extends StatelessWidget {
                               fontSize: 20,
                               fontFamily: "cursive",
                               color: Colors.purple),
-                          item.amount.toString(),
+                          "\$ ${item.amount}",
                         ),
                       ),
                       Column(
