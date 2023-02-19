@@ -37,7 +37,7 @@ class MyHomePage extends StatelessWidget {
           title: const Text("Flutter App"),
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Card(
@@ -49,12 +49,13 @@ class MyHomePage extends StatelessWidget {
                 child: Text("Chart!"),
               ),
             ),
-            const Card(
-              color: Colors.amber,
-              child: SizedBox(
-                child: Text("List of TX"),
-              ),
-            ),
+            Column(
+              children: transactions.map((item) {
+                return Card(
+                  child: Text(item.title),
+                );
+              }).toList(),
+            )
           ],
         ));
   }
