@@ -30,6 +30,8 @@ class MyHomePage extends StatelessWidget {
           title: const Text("Flutter App"),
         ),
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Card(
               color: Colors.blue,
@@ -40,9 +42,9 @@ class MyHomePage extends StatelessWidget {
                 child: Text("Chart!"),
               ),
             ),
-            const SizedBox(
-              width: double.infinity,
-              child: Card(
+            const Card(
+              color: Colors.amber,
+              child: SizedBox(
                 child: Text("List of TX"),
               ),
             ),
