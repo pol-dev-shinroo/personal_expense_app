@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import "./transaction.dart";
 
@@ -49,6 +50,40 @@ class MyHomePage extends StatelessWidget {
               child: const SizedBox(
                 width: double.infinity,
                 child: Text("Chart!"),
+              ),
+            ),
+            Card(
+              elevation: 5,
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  children: <Widget>[
+                    const TextField(
+                      autocorrect: true,
+                      cursorColor: Colors.amber,
+                      decoration: InputDecoration(
+                          labelText: "Title",
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.purple),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.amber))),
+                    ),
+                    TextField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      cursorColor: Colors.amber,
+                      decoration: const InputDecoration(
+                        labelText: "Amount",
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Column(
