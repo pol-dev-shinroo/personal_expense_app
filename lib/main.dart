@@ -37,7 +37,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Flutter App"),
+          title: const Text("Personal Expense App"),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -82,6 +82,12 @@ class MyHomePage extends StatelessWidget {
                         ),
                       ),
                     ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue),
+                      onPressed: () {},
+                      child: const Text("Submit"),
+                    )
                   ],
                 ),
               ),
