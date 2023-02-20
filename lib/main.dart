@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
 
@@ -32,6 +33,11 @@ class MyHomePage extends StatelessWidget {
     Transaction(
         id: "2", title: "Addidas Shoes", amount: 15.99, date: DateTime.now()),
   ];
+
+  final inputController = TextEditingController();
+  final amountController = TextEditingController();
+  // String? titleInput;
+  // String? amountInput;
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +64,14 @@ class MyHomePage extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   children: <Widget>[
-                    const TextField(
+                    TextField(
+                      // onChanged: (value) {
+                      //   titleInput = value;
+                      // },
+                      controller: inputController,
                       autocorrect: true,
                       cursorColor: Colors.amber,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           labelText: "Title",
                           border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.purple),
@@ -70,6 +80,10 @@ class MyHomePage extends StatelessWidget {
                               borderSide: BorderSide(color: Colors.amber))),
                     ),
                     TextField(
+                      controller: amountController,
+                      // onChanged: (value) {
+                      //   amountInput = value;
+                      // },
                       keyboardType: TextInputType.number,
                       inputFormatters: <TextInputFormatter>[
                         FilteringTextInputFormatter.digitsOnly
@@ -85,7 +99,13 @@ class MyHomePage extends StatelessWidget {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue),
-                      onPressed: () {},
+                      onPressed: () {
+                        // ignore: avoid_print
+                        print(inputController.text);
+                        // print(titleInput);
+                        // ignore: avoid_print
+                        print(amountController.text);
+                      },
                       child: const Text("Submit"),
                     )
                   ],
