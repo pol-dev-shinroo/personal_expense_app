@@ -26,6 +26,8 @@ class _TextInputFieldsState extends State<TextInputFields> {
     }
 
     widget.addTransaction(enteredTitle, enteredAmount);
+
+    Navigator.of(context).pop();
   }
 
   @override
