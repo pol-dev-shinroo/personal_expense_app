@@ -42,21 +42,23 @@ class MyHomePage extends StatelessWidget {
         appBar: AppBar(
           title: const Text("Personal Expense App"),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Card(
-              color: Colors.blue,
-              shape: Border.all(width: 1, color: Colors.blue),
-              elevation: 5,
-              child: const SizedBox(
-                width: double.infinity,
-                child: Text("Chart!"),
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Card(
+                color: Colors.blue,
+                shape: Border.all(width: 1, color: Colors.blue),
+                elevation: 5,
+                child: const SizedBox(
+                  width: double.infinity,
+                  child: Text("Chart!"),
+                ),
               ),
-            ),
-            const UserTransaction(),
-          ],
+              const UserTransaction(),
+            ],
+          ),
         ));
   }
 }
