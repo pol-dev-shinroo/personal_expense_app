@@ -12,9 +12,14 @@ class TextInputFields extends StatelessWidget {
   final amountController = TextEditingController();
 
   void _addTransactionHanlder() {
-    if (inputController.text != "" && amountController.text != "") {
-      addTransaction(inputController.text, double.parse(amountController.text));
+    final enteredTitle = inputController.text;
+    final enteredAmount = double.parse(amountController.text);
+
+    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+      return;
     }
+
+    addTransaction(enteredTitle, enteredAmount);
   }
 
   @override
@@ -36,6 +41,7 @@ class TextInputFields extends StatelessWidget {
                   ),
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.amber))),
+              onSubmitted: (_) => _addTransactionHanlder(),
             ),
             Container(
               margin: const EdgeInsets.only(top: 10),
@@ -52,6 +58,7 @@ class TextInputFields extends StatelessWidget {
                     borderSide: BorderSide(color: Colors.black),
                   ),
                 ),
+                onSubmitted: (_) => _addTransactionHanlder(),
               ),
             ),
             Row(
