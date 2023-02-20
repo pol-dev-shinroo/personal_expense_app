@@ -11,45 +11,45 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      child: SingleChildScrollView(
-        child: Column(
-          children: transactions.map((item) {
-            return Card(
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.amber, width: 2),
-                    ),
-                    padding: const EdgeInsets.all(10),
-                    child: Text(
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          fontFamily: "cursive",
-                          color: Colors.purple),
-                      "\$ ${item.amount}",
-                    ),
+      // List view is a column with a scroll + the height is infinite
+      // since the height is infinite, you need to set height for the Container
+      child: ListView(
+        children: transactions.map((item) {
+          return Card(
+            child: Row(
+              children: <Widget>[
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.amber, width: 2),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(item.title,
-                          style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold)),
-                      Text(
-                        DateFormat.yMMMd().format(item.date),
-                        style: const TextStyle(color: Colors.grey),
-                      ),
-                    ],
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        fontFamily: "cursive",
+                        color: Colors.purple),
+                    "\$ ${item.amount}",
                   ),
-                ],
-              ),
-            );
-          }).toList(),
-        ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(item.title,
+                        style: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold)),
+                    Text(
+                      DateFormat.yMMMd().format(item.date),
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        }).toList(),
       ),
     );
   }
