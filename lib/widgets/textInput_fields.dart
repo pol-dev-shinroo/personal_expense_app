@@ -3,12 +3,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class TextInputFields extends StatelessWidget {
+class TextInputFields extends StatefulWidget {
   final Function addTransaction;
 
-  TextInputFields({super.key, required this.addTransaction});
+  const TextInputFields({super.key, required this.addTransaction});
 
+  @override
+  State<TextInputFields> createState() => _TextInputFieldsState();
+}
+
+class _TextInputFieldsState extends State<TextInputFields> {
   final inputController = TextEditingController();
+
   final amountController = TextEditingController();
 
   void _addTransactionHanlder() {
@@ -19,7 +25,7 @@ class TextInputFields extends StatelessWidget {
       return;
     }
 
-    addTransaction(enteredTitle, enteredAmount);
+    widget.addTransaction(enteredTitle, enteredAmount);
   }
 
   @override

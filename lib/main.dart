@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import "./widgets/user_transaction.dart";
+import "./models/transaction.dart";
+import "./widgets/textInput_fields.dart";
+import "./widgets/transaction_list.dart";
 
 void main() {
   runApp(const MyApp());
@@ -30,11 +32,40 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
-  // String? titleInput;
-  // String? amountInput;
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final List<Transaction> transactions = [
+    Transaction(
+        id: "1", title: "Nike Shoes", amount: 12.86, date: DateTime.now()),
+    Transaction(
+        id: "2", title: "Addidas Shoes", amount: 15.99, date: DateTime.now()),
+  ];
+
+  void _addNewTransaction(String title, double amount) {
+    final newTransaction = Transaction(
+        id: DateTime.now().toString(),
+        title: title,
+        amount: amount,
+        date: DateTime.now());
+
+    setState(() {
+      transactions.add(newTransaction);
+    });
+  }
+
+  void _toggleBtn(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (_) {
+          return TextInputFields(addTransaction: _addNewTransaction);
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +74,8 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: Colors.amber,
         title: const Text("My Expense"),
         actions: <Widget>[
-          IconButton(onPressed: () {}, icon: const Icon(Icons.add))
+          IconButton(
+              onPressed: () => _toggleBtn(context), icon: const Icon(Icons.add))
         ],
       ),
       body: SingleChildScrollView(
@@ -60,14 +92,14 @@ class MyHomePage extends StatelessWidget {
                 child: Text("Chart!"),
               ),
             ),
-            const UserTransaction(),
+            TransactionList(transactions: transactions),
           ],
         ),
       ),
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () => _toggleBtn(context),
       ),
     );
   }
