@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -9,6 +11,12 @@ class TextInputFields extends StatelessWidget {
   final inputController = TextEditingController();
   final amountController = TextEditingController();
 
+  void _addTransactionHanlder() {
+    if (inputController.text != "" && amountController.text != "") {
+      addTransaction(inputController.text, double.parse(amountController.text));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -18,9 +26,6 @@ class TextInputFields extends StatelessWidget {
         child: Column(
           children: <Widget>[
             TextField(
-              // onChanged: (value) {
-              //   titleInput = value;
-              // },
               controller: inputController,
               autocorrect: true,
               cursorColor: Colors.amber,
@@ -32,28 +37,28 @@ class TextInputFields extends StatelessWidget {
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.amber))),
             ),
-            TextField(
-              controller: amountController,
-              // onChanged: (value) {
-              //   amountInput = value;
-              // },
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly
-              ],
-              cursorColor: Colors.amber,
-              decoration: const InputDecoration(
-                labelText: "Amount",
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: TextField(
+                controller: amountController,
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly
+                ],
+                cursorColor: Colors.amber,
+                decoration: const InputDecoration(
+                  labelText: "Amount",
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
                 ),
               ),
             ),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-              onPressed: () {
-                addTransaction("asdf", 2.3);
-              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+              ),
+              onPressed: _addTransactionHanlder,
               child: const Text("Submit"),
             )
           ],
