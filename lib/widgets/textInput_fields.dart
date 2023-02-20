@@ -54,12 +54,28 @@ class TextInputFields extends StatelessWidget {
                 ),
               ),
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-              ),
-              onPressed: _addTransactionHanlder,
-              child: const Text("Submit"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.transparent),
+                    elevation: MaterialStateProperty.all(0),
+                    overlayColor: MaterialStateProperty.resolveWith((states) =>
+                        states.contains(MaterialState.pressed)
+                            ? Colors.transparent
+                            : null),
+                    shape:
+                        MaterialStateProperty.all(const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    )),
+                    side: MaterialStateProperty.all(BorderSide.none),
+                  ),
+                  onPressed: _addTransactionHanlder,
+                  child: const Text("Create Transaction"),
+                ),
+              ],
             )
           ],
         ),
