@@ -9,12 +9,12 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 300,
       // List view is a column with a scroll + the height is infinite
-      // since the height is infinite, you need to set height for the Container
-      child: ListView(
-        children: transactions.map((item) {
+      // since the height is infinite, you need to set height for the Container (needs a warpper)
+      child: ListView.builder(
+        itemBuilder: (context, idx) {
           return Card(
             child: Row(
               children: <Widget>[
@@ -31,17 +31,17 @@ class TransactionList extends StatelessWidget {
                         fontSize: 20,
                         fontFamily: "cursive",
                         color: Colors.purple),
-                    "\$ ${item.amount}",
+                    "\$ ${transactions[idx].amount}",
                   ),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(item.title,
+                    Text(transactions[idx].title,
                         style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold)),
                     Text(
-                      DateFormat.yMMMd().format(item.date),
+                      DateFormat.yMMMd().format(transactions[idx].date),
                       style: const TextStyle(color: Colors.grey),
                     ),
                   ],
@@ -49,7 +49,8 @@ class TransactionList extends StatelessWidget {
               ],
             ),
           );
-        }).toList(),
+        },
+        itemCount: transactions.length,
       ),
     );
   }
