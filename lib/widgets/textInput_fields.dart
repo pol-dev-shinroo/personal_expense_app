@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class TextInputFields extends StatelessWidget {
-  TextInputFields({super.key});
+  final Function addTransaction;
+
+  TextInputFields({super.key, required this.addTransaction});
 
   final inputController = TextEditingController();
   final amountController = TextEditingController();
@@ -50,11 +52,7 @@ class TextInputFields extends StatelessWidget {
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
               onPressed: () {
-                // ignore: avoid_print
-                print(inputController.text);
-                // print(titleInput);
-                // ignore: avoid_print
-                print(amountController.text);
+                addTransaction("asdf", 2.3);
               },
               child: const Text("Submit"),
             )

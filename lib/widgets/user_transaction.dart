@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import "../models/transaction.dart";
-import "../widgets/TextInputFields.dart";
-import "../widgets/transactionList.dart";
+import "../widgets/textInput_fields.dart";
+import 'transaction_list.dart';
 
 class UserTransaction extends StatefulWidget {
   const UserTransaction({super.key});
@@ -17,12 +17,26 @@ class _UserTransactionState extends State<UserTransaction> {
     Transaction(
         id: "2", title: "Addidas Shoes", amount: 15.99, date: DateTime.now()),
   ];
+
+  // underscore to mark this method as private
+  void _addNewTransaction(String title, double amount) {
+    final newTransaction = Transaction(
+        id: DateTime.now().toString(),
+        title: title,
+        amount: amount,
+        date: DateTime.now());
+
+    setState(() {
+      transactions.add(newTransaction);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        TextInputFields(),
-        TransactionList(userTransactions: transactions),
+        TextInputFields(addTransaction: _addNewTransaction),
+        TransactionList(transactions: transactions),
       ],
     );
   }

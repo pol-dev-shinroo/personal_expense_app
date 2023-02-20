@@ -1,18 +1,16 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import "../models/transaction.dart";
 
 class TransactionList extends StatelessWidget {
-  final List<Transaction> userTransactions;
+  final List<Transaction> transactions;
 
-  const TransactionList({super.key, required this.userTransactions});
+  const TransactionList({super.key, required this.transactions});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: userTransactions.map((item) {
+      children: transactions.map((item) {
         return Card(
           child: Row(
             children: <Widget>[
