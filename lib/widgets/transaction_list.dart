@@ -13,46 +13,69 @@ class TransactionList extends StatelessWidget {
       height: 900,
       // List view is a column with a scroll + the height is infinite
       // since the height is infinite, you need to set height for the Container (needs a warpper)
-      child: ListView.builder(
-        itemBuilder: (context, idx) {
-          return Card(
-            child: Row(
+      child: transactions.isEmpty
+          ? Column(
               children: <Widget>[
                 Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Theme.of(context).primaryColor, width: 2),
-                  ),
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
+                  margin: const EdgeInsets.all(10),
+                  child: const Text(
+                    "No transactions added yet!",
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        fontFamily: "cursive",
-                        color: Theme.of(context).primaryColor),
-                    "\$ ${transactions[idx].amount.toStringAsFixed(2)}",
+                        fontFamily: "Quicksand", fontWeight: FontWeight.w700),
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(transactions[idx].title,
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold)),
-                    Text(
-                      DateFormat.yMMMd().format(transactions[idx].date),
-                      style: const TextStyle(color: Colors.grey),
-                    ),
-                  ],
+                const SizedBox(
+                  height: 20,
                 ),
+                SizedBox(
+                  height: 200,
+                  child: Image.asset(
+                    "assets/images/waiting.png",
+                    fit: BoxFit.cover,
+                  ),
+                )
               ],
+            )
+          : ListView.builder(
+              itemBuilder: (context, idx) {
+                return Card(
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 20),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Theme.of(context).primaryColor, width: 2),
+                        ),
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              fontFamily: "cursive",
+                              color: Theme.of(context).primaryColor),
+                          "\$ ${transactions[idx].amount.toStringAsFixed(2)}",
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(transactions[idx].title,
+                              style: const TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold)),
+                          Text(
+                            DateFormat.yMMMd().format(transactions[idx].date),
+                            style: const TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+              itemCount: transactions.length,
             ),
-          );
-        },
-        itemCount: transactions.length,
-      ),
     );
   }
 }

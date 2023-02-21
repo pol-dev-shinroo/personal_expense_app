@@ -15,8 +15,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        fontFamily: "Quicksand",
         primarySwatch: Colors.amber,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+        appBarTheme: const AppBarTheme(
+            titleTextStyle: TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 20,
+                fontWeight: FontWeight.bold)),
         useMaterial3: false,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -42,10 +48,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> transactions = [
-    Transaction(
-        id: "1", title: "Nike Shoes", amount: 12.86, date: DateTime.now()),
-    Transaction(
-        id: "2", title: "Addidas Shoes", amount: 15.99, date: DateTime.now()),
+    // Transaction(
+    //     id: "1", title: "Nike Shoes", amount: 12.86, date: DateTime.now()),
+    // Transaction(
+    //     id: "2", title: "Addidas Shoes", amount: 15.99, date: DateTime.now()),
   ];
 
   void _addNewTransaction(String title, double amount) {
@@ -72,7 +78,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My Expense"),
+        title: const Text(
+          "My Expense",
+          style: TextStyle(fontFamily: "Quicksand"),
+        ),
         actions: <Widget>[
           IconButton(
               onPressed: () => _toggleBtn(context), icon: const Icon(Icons.add))
