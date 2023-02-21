@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import "./models/transaction.dart";
 import "./widgets/textInput_fields.dart";
 import "./widgets/transaction_list.dart";
+import "./widgets/chart.dart";
 
 void main() {
   runApp(const MyApp());
@@ -54,6 +55,16 @@ class _MyHomePageState extends State<MyHomePage> {
     //     id: "2", title: "Addidas Shoes", amount: 15.99, date: DateTime.now()),
   ];
 
+  List<Transaction> get _recentTransactions {
+    return transactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          const Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
+
   void _addNewTransaction(String title, double amount) {
     final newTransaction = Transaction(
         id: DateTime.now().toString(),
@@ -101,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text("Chart!"),
               ),
             ),
+            Chart(recentTransactions: _recentTransactions),
             TransactionList(transactions: transactions),
           ],
         ),
