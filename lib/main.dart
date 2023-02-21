@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
         fontFamily: "Quicksand",
         primarySwatch: Colors.amber,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+        textTheme: const TextTheme(
+            bodySmall: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
         appBarTheme: const AppBarTheme(
             titleTextStyle: TextStyle(
                 fontFamily: 'OpenSans',
