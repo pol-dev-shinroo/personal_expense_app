@@ -15,8 +15,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.amber,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+        useMaterial3: false,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
@@ -71,7 +72,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amber,
         title: const Text("My Expense"),
         actions: <Widget>[
           IconButton(
@@ -84,8 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Card(
-              color: Colors.blue,
-              shape: Border.all(width: 1, color: Colors.blue),
+              color: Theme.of(context).primaryColor,
+              shape: Border.all(width: 0, color: Colors.blue),
               elevation: 5,
               child: const SizedBox(
                 width: double.infinity,

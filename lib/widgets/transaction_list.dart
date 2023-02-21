@@ -10,7 +10,7 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: 900,
       // List view is a column with a scroll + the height is infinite
       // since the height is infinite, you need to set height for the Container (needs a warpper)
       child: ListView.builder(
@@ -22,15 +22,16 @@ class TransactionList extends StatelessWidget {
                   margin:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.amber, width: 2),
+                    border: Border.all(
+                        color: Theme.of(context).primaryColor, width: 2),
                   ),
                   padding: const EdgeInsets.all(10),
                   child: Text(
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                         fontFamily: "cursive",
-                        color: Colors.purple),
+                        color: Theme.of(context).primaryColor),
                     "\$ ${transactions[idx].amount.toStringAsFixed(2)}",
                   ),
                 ),
