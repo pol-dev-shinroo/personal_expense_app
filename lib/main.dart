@@ -25,8 +25,10 @@ class MyApp extends StatelessWidget {
             titleTextStyle: TextStyle(
                 fontFamily: 'OpenSans',
                 fontSize: 20,
-                fontWeight: FontWeight.bold)),
-        useMaterial3: false,
+                fontWeight: FontWeight.bold,
+                color: Colors.black),
+            backgroundColor: Colors.amber),
+        useMaterial3: true,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
@@ -106,12 +108,15 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Card(
-              color: Theme.of(context).primaryColor,
-              shape: Border.all(width: 0, color: Colors.blue),
+              color: Colors.amber[50],
+              shape: Border.all(width: 0),
               elevation: 5,
               child: const SizedBox(
                 width: double.infinity,
-                child: Text("Chart!"),
+                child: Text(
+                  "Chart",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
             ),
             Chart(recentTransactions: _recentTransactions),

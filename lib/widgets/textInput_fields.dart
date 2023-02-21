@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import "package:intl/intl.dart";
 
 class TextInputFields extends StatefulWidget {
   final Function addTransaction;
@@ -17,6 +18,9 @@ class _TextInputFieldsState extends State<TextInputFields> {
 
   final amountController = TextEditingController();
 
+  // this is not final because it will be set once the user selects date
+  DateTime? _selectedDate;
+
   void _addTransactionHanlder() {
     final enteredTitle = inputController.text;
     final enteredAmount = double.parse(amountController.text);
@@ -28,6 +32,22 @@ class _TextInputFieldsState extends State<TextInputFields> {
     widget.addTransaction(enteredTitle, enteredAmount);
 
     Navigator.of(context).pop();
+  }
+
+  void _presentDatePicker() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2023),
+            lastDate: DateTime.now())
+        .then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+    });
   }
 
   @override
@@ -67,6 +87,27 @@ class _TextInputFieldsState extends State<TextInputFields> {
                   ),
                 ),
                 onSubmitted: (_) => _addTransactionHanlder(),
+              ),
+            ),
+            SizedBox(
+              height: 70,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      _selectedDate == null
+                          ? "No Date Chosen!"
+                          : 'Picked Date: ${DateFormat.yMd().format(_selectedDate!)}',
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: _presentDatePicker,
+                    child: const Text(
+                      "Choose Date",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
               ),
             ),
             Row(
