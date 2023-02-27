@@ -99,37 +99,39 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "My Expense",
-          style: TextStyle(fontFamily: "Quicksand"),
-        ),
-        actions: <Widget>[
-          IconButton(
-              onPressed: () => _toggleBtn(context), icon: const Icon(Icons.add))
-        ],
+    final appBar = AppBar(
+      title: const Text(
+        "My Expense",
+        style: TextStyle(fontFamily: "Quicksand"),
       ),
+      actions: <Widget>[
+        IconButton(
+            onPressed: () => _toggleBtn(context), icon: const Icon(Icons.add))
+      ],
+    );
+
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Card(
-              color: Colors.amber[50],
-              shape: Border.all(width: 0),
-              elevation: 5,
-              child: const SizedBox(
-                width: double.infinity,
-                child: Text(
-                  "Chart",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
+            SizedBox(
+              height: (MediaQuery.of(context).size.height -
+                      appBar.preferredSize.height -
+                      MediaQuery.of(context).padding.top) *
+                  0.4,
+              child: Chart(recentTransactions: _recentTransactions),
             ),
-            Chart(recentTransactions: _recentTransactions),
-            TransactionList(
-                transactions: transactions, deleteFn: _deleteTransaction),
+            SizedBox(
+              height: (MediaQuery.of(context).size.height -
+                      appBar.preferredSize.height -
+                      MediaQuery.of(context).padding.top) *
+                  0.6,
+              child: TransactionList(
+                  transactions: transactions, deleteFn: _deleteTransaction),
+            ),
           ],
         ),
       ),
