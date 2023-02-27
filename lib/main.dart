@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:flutter/services.dart";
+import "dart:io";
 
 import "./models/transaction.dart";
 import "./widgets/textInput_fields.dart";
@@ -144,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   const Text("Show Chart"),
-                  Switch(
+                  Switch.adaptive(
                       value: _showChart,
                       onChanged: (val) {
                         setState(() {
@@ -176,10 +177,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () => _toggleBtn(context),
-      ),
+      floatingActionButton: Platform.isIOS
+          ? Container()
+          : FloatingActionButton(
+              child: const Icon(Icons.add),
+              onPressed: () => _toggleBtn(context),
+            ),
     );
   }
 }
