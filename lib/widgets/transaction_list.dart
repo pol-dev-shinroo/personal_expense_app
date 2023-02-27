@@ -15,28 +15,31 @@ class TransactionList extends StatelessWidget {
         // List view is a column with a scroll + the height is infinite
         // since the height is infinite, you need to set height for the Container (needs a warpper)
         transactions.isEmpty
-            ? Column(
-                children: <Widget>[
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: const Text(
-                      "No transactions added yet!",
-                      style: TextStyle(
-                          fontFamily: "Quicksand", fontWeight: FontWeight.w700),
+            ? LayoutBuilder(builder: (ctx, constraints) {
+                return Column(
+                  children: <Widget>[
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      child: const Text(
+                        "No transactions added yet!",
+                        style: TextStyle(
+                            fontFamily: "Quicksand",
+                            fontWeight: FontWeight.w700),
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                    height: 200,
-                    child: Image.asset(
-                      "assets/images/waiting.png",
-                      fit: BoxFit.cover,
+                    const SizedBox(
+                      height: 20,
                     ),
-                  )
-                ],
-              )
+                    SizedBox(
+                      height: constraints.maxHeight * 0.6,
+                      child: Image.asset(
+                        "assets/images/waiting.png",
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  ],
+                );
+              })
             : ListView.builder(
                 itemBuilder: (context, idx) {
                   return Card(
