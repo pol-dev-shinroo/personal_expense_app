@@ -55,88 +55,95 @@ class _TextInputFieldsState extends State<TextInputFields> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: <Widget>[
-            TextField(
-              controller: inputController,
-              autocorrect: true,
-              cursorColor: Colors.amber,
-              decoration: const InputDecoration(
-                  labelText: "Title",
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.amber))),
-              onSubmitted: (_) => _addTransactionHanlder(),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              child: TextField(
-                controller: amountController,
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly
-                ],
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Container(
+          padding: EdgeInsets.only(
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+          ),
+          child: Column(
+            children: <Widget>[
+              TextField(
+                controller: inputController,
+                autocorrect: true,
                 cursorColor: Colors.amber,
                 decoration: const InputDecoration(
-                  labelText: "Amount",
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                ),
+                    labelText: "Title",
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.purple),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.amber))),
                 onSubmitted: (_) => _addTransactionHanlder(),
               ),
-            ),
-            SizedBox(
-              height: 70,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      _selectedDate == null
-                          ? "No Date Chosen!"
-                          : 'Picked Date: ${DateFormat.yMd().format(_selectedDate!)}',
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: TextField(
+                  controller: amountController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  cursorColor: Colors.amber,
+                  decoration: const InputDecoration(
+                    labelText: "Amount",
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: _presentDatePicker,
-                    child: const Text(
-                      "Choose Date",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                  onSubmitted: (_) => _addTransactionHanlder(),
+                ),
+              ),
+              SizedBox(
+                height: 70,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        _selectedDate == null
+                            ? "No Date Chosen!"
+                            : 'Picked Date: ${DateFormat.yMd().format(_selectedDate!)}',
+                      ),
                     ),
+                    ElevatedButton(
+                      onPressed: _presentDatePicker,
+                      child: const Text(
+                        "Choose Date",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                      elevation: MaterialStateProperty.all(0),
+                      overlayColor: MaterialStateProperty.resolveWith(
+                          (states) => states.contains(MaterialState.pressed)
+                              ? Colors.transparent
+                              : null),
+                      shape: MaterialStateProperty.all(
+                          const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                      )),
+                      side: MaterialStateProperty.all(BorderSide.none),
+                    ),
+                    onPressed: _addTransactionHanlder,
+                    child: const Text("Create Transaction"),
                   ),
                 ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.transparent),
-                    elevation: MaterialStateProperty.all(0),
-                    overlayColor: MaterialStateProperty.resolveWith((states) =>
-                        states.contains(MaterialState.pressed)
-                            ? Colors.transparent
-                            : null),
-                    shape:
-                        MaterialStateProperty.all(const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                    )),
-                    side: MaterialStateProperty.all(BorderSide.none),
-                  ),
-                  onPressed: _addTransactionHanlder,
-                  child: const Text("Create Transaction"),
-                ),
-              ],
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
