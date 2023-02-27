@@ -22,14 +22,17 @@ class _TextInputFieldsState extends State<TextInputFields> {
   DateTime? _selectedDate;
 
   void _addTransactionHanlder() {
+    if (amountController.text.isEmpty) {
+      return;
+    }
     final enteredTitle = inputController.text;
     final enteredAmount = double.parse(amountController.text);
 
-    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+    if (enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null) {
       return;
     }
 
-    widget.addTransaction(enteredTitle, enteredAmount);
+    widget.addTransaction(enteredTitle, enteredAmount, _selectedDate);
 
     Navigator.of(context).pop();
   }

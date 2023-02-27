@@ -69,24 +69,32 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String title, double amount) {
+  void _addNewTransaction(String title, double amount, DateTime chosenDate) {
     final newTransaction = Transaction(
-        id: DateTime.now().toString(),
-        title: title,
-        amount: amount,
-        date: DateTime.now());
+      id: DateTime.now().toString(),
+      title: title,
+      amount: amount,
+      date: chosenDate,
+    );
 
     setState(() {
       transactions.add(newTransaction);
     });
   }
 
+  // use GestureDetector for controlling botton behavior
   void _toggleBtn(BuildContext context) {
     showModalBottomSheet(
         context: context,
         builder: (_) {
           return TextInputFields(addTransaction: _addNewTransaction);
         });
+  }
+
+  void _deleteTransaction(String id) {
+    setState(() {
+      transactions.removeWhere((item) => item.id == id);
+    });
   }
 
   @override
@@ -120,7 +128,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Chart(recentTransactions: _recentTransactions),
-            TransactionList(transactions: transactions),
+            TransactionList(
+                transactions: transactions, deleteFn: _deleteTransaction),
           ],
         ),
       ),
