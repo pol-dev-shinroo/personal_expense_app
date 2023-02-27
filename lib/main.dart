@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import "package:flutter/services.dart";
+
 import "./models/transaction.dart";
 import "./widgets/textInput_fields.dart";
 import "./widgets/transaction_list.dart";
 import "./widgets/chart.dart";
 
 void main() {
+  // not allowing landscape mode
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(const MyApp());
 }
 
